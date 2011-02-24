@@ -1,0 +1,236 @@
+<!DOCTYPE html>  <html> <head>   <title>underscore.strings.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               underscore.strings.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>               <pre><code>Underscore Strings v0.1
+Enhances the _ object with a series of useful methods
+extracted from Protorype's js String module
+Source code available at:
+http://github.com/aganov/underscore-strings
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p><a href="../spec/runner.html">Run test suite</a> |
+<a href="http://github.com/aganov/underscore-strings/tarball/master">Download .tar.gz</a> |
+<a href="http://github.com/aganov/underscore-strings/zipball/master">Download .zip</a></p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>TODO</p>
+
+<ul>
+<li>port <a href="http://api.prototypejs.org/language/String/prototype/gsub/">String#gsub</a> method</li>
+<li>port <a href="http://api.prototypejs.org/language/String/prototype/sub/">String#sub</a> method</li>
+</ul>             </td>             <td class="code">               <div class="highlight"><pre><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+  </pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p>Establish the root object, <code>window</code> in the browser, or <code>global</code> on the server.</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="kd">var</span> <span class="nx">root</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+    
+  <span class="kd">var</span> <span class="nx">strip</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">trim</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">string</span><span class="p">.</span><span class="nx">trim</span><span class="p">();</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="nx">string</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/^\s+/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\s+$/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <h2>blank</h2>
+
+<p><a href="http://api.prototypejs.org/language/String/prototype/blank/">String#blank</a>
+Check if the string is "blank" - either empty (length of <code>0</code>) or
+containing only whitespace.</p>
+
+<h5>Example</h5>
+
+<pre><code>_("").blank()
+» true
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">blank</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="sr">/^\s*$/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">string</span><span class="p">);</span>
+    <span class="p">},</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <h2>camelize</h2>
+
+<p><a href="http://api.prototypejs.org/language/String/prototype/camelize/">String#camelize</a>
+Converts a string separated by dashes into a camelCase equivalent.
+For instance, <code>foo-bar</code> would be converted to <code>fooBar</code>.</p>
+
+<h5>Example</h5>
+
+<pre><code>_("background-color").camelize()
+» "backgroundColor"
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">camelize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">string</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/-+(.)?/g</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">match</span><span class="p">,</span> <span class="nx">chr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">chr</span> <span class="o">?</span> <span class="nx">chr</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">()</span> <span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+      <span class="p">});</span>
+    <span class="p">},</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <h2>capitalize</h2>
+
+<p><a href="http://api.prototypejs.org/language/String/prototype/capitalize/">String#capitalize</a>
+Capitalizes the first letter of a string and downcases all the others.</p>
+
+<h5>Examples</h5>
+
+<pre><code>_("hello").capitalize()
+» "Hello"
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">capitalize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">string</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">toUpperCase</span><span class="p">()</span> <span class="o">+</span> <span class="nx">string</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nx">toLowerCase</span><span class="p">();</span>
+    <span class="p">},</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <h2>dasherize</h2>
+
+<p><a href="http://api.prototypejs.org/language/String/prototype/dasherize/">String#dasherize</a>
+Replaces every instance of the underscore character <code>_</code> by a dash <code>-</code>.</p>
+
+<h5>Examples</h5>
+
+<pre><code>_("border_bottom_width").dasherize()
+» "border-bottom-width"
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">dasherize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">string</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/_/g</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">);</span>
+    <span class="p">},</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>               <h2>empty</h2>
+
+<p><a href="http://api.prototypejs.org/language/String/prototype/empty/">String#empty</a>
+Checks if the string is empty.</p>
+
+<h5>Examples</h5>
+
+<pre><code>_("").empty()
+» true
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">empty</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">string</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span>
+    <span class="p">},</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-10">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-10">&#182;</a>               </div>               <h2>endsWith</h2>
+
+<p><a href="http://api.prototypejs.org/language/String/prototype/endsWith/">String#endsWith</a>
+Checks if the string ends with substring.</p>
+
+<h5>Example</h5>
+
+<pre><code>_("slaughter").endsWith("laughter")
+» true
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">endsWith</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">string</span><span class="p">,</span> <span class="nx">pattern</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nx">string</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="nx">pattern</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span></pre></div>             </td>           </tr>                               <tr id="section-11">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-11">&#182;</a>               </div>               <p>We use <code>indexOf</code> instead of <code>lastIndexOf</code> to avoid tying execution
+time to string length when string doesn't end with pattern.</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">return</span> <span class="nx">d</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">string</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">pattern</span><span class="p">,</span> <span class="nx">d</span><span class="p">)</span> <span class="o">===</span> <span class="nx">d</span><span class="p">;</span>
+    <span class="p">},</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-12">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-12">&#182;</a>               </div>               <h2>escapeHTML</h2>
+
+<p><a href="http://api.prototypejs.org/language/String/prototype/escapeHTML/">String#escapeHTML</a>
+Converts HTML special characters to their entity equivalents.</p>
+
+<h5>Examples</h5>
+
+<pre><code>_("&lt;div class="article"&gt;This is an article&lt;/div&gt;").escapeHTML()
+» "&amp;lt;div class="article"&amp;gt;This is an article&amp;lt;/div&amp;gt;"
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">escapeHTML</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">string</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&amp;/g</span><span class="p">,</span><span class="s1">&#39;&amp;amp;&#39;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&lt;/g</span><span class="p">,</span><span class="s1">&#39;&amp;lt;&#39;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&gt;/g</span><span class="p">,</span><span class="s1">&#39;&amp;gt;&#39;</span><span class="p">);</span>
+    <span class="p">},</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-13">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-13">&#182;</a>               </div>               <h2>include</h2>
+
+<p><a href="http://api.prototypejs.org/language/String/prototype/include/">String#include</a>
+Check if the string contains a substring.</p>
+
+<h5>Examples</h5>
+
+<pre><code>_("Underscore").include("score")
+» true
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">include</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">string</span><span class="p">,</span> <span class="nx">pattern</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">string</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">pattern</span><span class="p">)</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">},</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-14">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-14">&#182;</a>               </div>               <h2>toQueryParams</h2>
+
+<p><a href="http://api.prototypejs.org/language/String/prototype/toQueryParams/">String#toQueryParams</a>
+Parses a URI-like query string and returns an object composed of parameter/value pairs.</p>
+
+<h5>Example</h5>
+
+<pre><code>_("section=blog&amp;id=45").toQueryParams()
+» {section: 'blog', id: '45'}
+
+_("http://www.example.com?section=blog&amp;id=45#comments").toQueryParams()
+» {section: 'blog', id: '45'}
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">toQueryParams</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">string</span><span class="p">,</span> <span class="nx">separator</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">match</span> <span class="o">=</span> <span class="nx">_</span><span class="p">(</span><span class="nx">string</span><span class="p">).</span><span class="nx">strip</span><span class="p">().</span><span class="nx">match</span><span class="p">(</span><span class="sr">/([^?#]*)(#.*)?$/</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">match</span><span class="p">)</span> <span class="k">return</span> <span class="p">{</span> <span class="p">};</span>
+      
+      <span class="k">return</span> <span class="nx">_</span><span class="p">(</span><span class="nx">match</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="nx">separator</span> <span class="o">||</span> <span class="s1">&#39;&amp;&#39;</span><span class="p">)).</span><span class="nx">reduce</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">hash</span><span class="p">,</span> <span class="nx">pair</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">((</span><span class="nx">pair</span> <span class="o">=</span> <span class="nx">pair</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span> <span class="p">{</span>
+          <span class="kd">var</span> <span class="nx">key</span> <span class="o">=</span> <span class="nb">decodeURIComponent</span><span class="p">(</span><span class="nx">pair</span><span class="p">.</span><span class="nx">shift</span><span class="p">()),</span>
+              <span class="nx">value</span> <span class="o">=</span> <span class="nx">pair</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">?</span> <span class="nx">pair</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)</span> <span class="o">:</span> <span class="nx">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+              
+          <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">!=</span> <span class="kc">undefined</span><span class="p">)</span> <span class="nx">value</span> <span class="o">=</span> <span class="nb">decodeURIComponent</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+          
+          <span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">hash</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">_</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">hash</span><span class="p">[</span><span class="nx">key</span><span class="p">]))</span> <span class="nx">hash</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">hash</span><span class="p">[</span><span class="nx">key</span><span class="p">]];</span>
+            <span class="nx">hash</span><span class="p">[</span><span class="nx">key</span><span class="p">].</span><span class="nx">push</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+          <span class="p">}</span>
+          <span class="k">else</span> <span class="nx">hash</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nx">hash</span><span class="p">;</span>
+      <span class="p">},</span> <span class="p">{});</span>
+    <span class="p">},</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-15">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-15">&#182;</a>               </div>               <h2>startsWith</h2>
+
+<p><a href="http://api.prototypejs.org/language/String/prototype/startsWith/">String#startsWith</a>
+Checks if the string starts with <code>substring</code></p>
+
+<h5>Example</h5>
+
+<pre><code>_("Underscore").include("Under")
+» true
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">startsWith</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">string</span><span class="p">,</span> <span class="nx">pattern</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">string</span><span class="p">.</span><span class="nx">lastIndexOf</span><span class="p">(</span><span class="nx">pattern</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">===</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">},</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-16">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-16">&#182;</a>               </div>               <h2>strip</h2>
+
+<p><a href="http://api.prototypejs.org/language/String/prototype/strip/">String#strip</a>
+Strips all leading and trailing whitespace from a string.</p>
+
+<h5>Example</h5>
+
+<pre><code>_('    hello world!    ').strip()
+» "hello world!"
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">strip</span><span class="o">:</span> <span class="nx">strip</span><span class="p">,</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-17">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-17">&#182;</a>               </div>               <h2>truncate</h2>
+
+<p><a href="http://api.prototypejs.org/language/String/prototype/truncate/">String#truncate</a>
+Truncates a string to the given length and appends a suffix
+to it (indicating that it is only an excerpt).</p>
+
+<h5>Example</h5>
+
+<pre><code>_('A random sentence whose length exceeds 30 characters.').truncate()
+» "A random sentence whose len..."
+
+_('Some random text').truncate(10)
+» "Some ra..."
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">truncate</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">string</span><span class="p">,</span> <span class="nx">length</span><span class="p">,</span> <span class="nx">truncation</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">length</span> <span class="o">=</span> <span class="nx">length</span> <span class="o">||</span> <span class="mi">30</span><span class="p">;</span>
+      <span class="nx">truncation</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">isUndefined</span><span class="p">(</span><span class="nx">truncation</span><span class="p">)</span> <span class="o">?</span> <span class="s1">&#39;...&#39;</span> <span class="o">:</span> <span class="nx">truncation</span><span class="p">;</span>
+      <span class="k">return</span> <span class="nx">string</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="nx">length</span> <span class="o">?</span>
+        <span class="nx">string</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">-</span> <span class="nx">truncation</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="o">+</span> <span class="nx">truncation</span> <span class="o">:</span> <span class="nb">String</span><span class="p">(</span><span class="nx">string</span><span class="p">);</span>
+    <span class="p">},</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-18">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-18">&#182;</a>               </div>               <h2>underscore</h2>
+
+<p><a href="http://api.prototypejs.org/language/String/prototype/underscore/">String#underscore</a>
+Converts a camelized string into a series of words separated by an
+underscore <code>_</code>.</p>
+
+<h5>Example</h5>
+
+<pre><code>_('borderBottomWidth').underscore()
+» "border_bottom_width"
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">underscore</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">string</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/::/g</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/([A-Z]+)([A-Z][a-z])/g</span><span class="p">,</span> <span class="s1">&#39;$1_$2&#39;</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/([a-z\d])([A-Z])/g</span><span class="p">,</span> <span class="s1">&#39;$1_$2&#39;</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/-/g</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">toLowerCase</span><span class="p">();</span>
+    <span class="p">},</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-19">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-19">&#182;</a>               </div>               <h2>unescapeHTML</h2>
+
+<p><a href="http://api.prototypejs.org/language/String/prototype/unescapeHTML/">String#unescapeHTML</a>
+Converts the entity forms of special HTML characters
+to their normal form.</p>
+
+<h5>Examples</h5>
+
+<pre><code>_("x &amp;gt; 10").unescapeHTML()
+» "x &gt; 10"
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">unescapeHTML</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">string</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&amp;lt;/g</span><span class="p">,</span><span class="s1">&#39;&lt;&#39;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&amp;gt;/g</span><span class="p">,</span><span class="s1">&#39;&gt;&#39;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&amp;amp;/g</span><span class="p">,</span><span class="s1">&#39;&amp;&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+  </pre></div>             </td>           </tr>                               <tr id="section-20">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-20">&#182;</a>               </div>               <h3>aliases</h3>
+
+<p><code>parseQuery</code> = <code>toQueryParams</code></p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nx">str</span><span class="p">.</span><span class="nx">parseQuery</span> <span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">toQueryParams</span><span class="p">;</span>
+  
+  <span class="nx">root</span><span class="p">.</span><span class="nx">_</span><span class="p">.</span><span class="nx">mixin</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span>
+<span class="p">}());</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
