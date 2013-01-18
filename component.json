@@ -1,0 +1,5 @@
+{
+  "name": "underscore-strings",
+  "version": "0.1.0",
+  "main": "./src/underscore.strings.js"
+}
